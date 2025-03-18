@@ -59,3 +59,69 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const selectedPassion = localStorage.getItem("selectedPassion");
+    const selectedIndustry = localStorage.getItem("selectedIndustry");
+    
+    if (!selectedPassion || !selectedIndustry) {
+        window.location.href = "index.html"; // Redirect if selections are missing
+    }
+
+    document.getElementById("career-heading").innerText = `Great choices! Let's see some career options...`;
+
+    // Call OpenAI API to generate career options
+    async function generateCareers(passion, industry) {
+        const apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your actual API key
+        const endpoint = "https://api.openai.com/v1/chat/completions";
+
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: "gpt-4",
+                messages: [{ 
+                    role: "user", 
+                    content: `Suggest 2 career options for someone passionate about ${passion} and interested in working in the ${industry} industry.` 
+                }]
+            })
+        });
+
+        const data = await response.json();
+        return data.choices[0].message.content.split("\n");
+    }
+
+    try {
+        const careerOptions = await generateCareers(selectedPassion, selectedIndustry);
+        
+        document.getElementById("career-option-1").innerText = careerOptions[0];
+        document.getElementById("career-option-2").innerText = careerOptions[1];
+
+        let selectedCareer = null;
+        const confirmButton = document.getElementById("confirm-career");
+
+        document.querySelectorAll(".option-button").forEach(button => {
+            button.addEventListener("click", () => {
+                document.querySelectorAll(".option-button").forEach(btn => btn.classList.remove("selected"));
+                button.classList.add("selected");
+                selectedCareer = button.innerText;
+                confirmButton.removeAttribute("disabled");
+            });
+        });
+
+        confirmButton.addEventListener("click", () => {
+            if (selectedCareer) {
+                localStorage.setItem("selectedCareer", selectedCareer);
+                window.location.href = "future-chat.html"; // Next step
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching AI-generated careers:", error);
+        alert("Failed to fetch career options. Please try again.");
+    }
+});
