@@ -159,3 +159,76 @@ function populateOptions(containerId, options, confirmButtonId) {
         container.appendChild(button);
     });
 }
+
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const selectedPassion = localStorage.getItem("selectedPassion");
+    const selectedIndustry = localStorage.getItem("selectedIndustry");
+
+    if (!selectedPassion || !selectedIndustry) {
+        window.location.href = "index.html"; // Redirect if selections are missing
+        return;
+    }
+
+    document.getElementById("career-heading").innerText = `Great choices! Here are your career options:`;
+
+    // OpenAI API request to generate career options
+    async function generateCareerOptions(passion, industry) {
+        const apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your OpenAI API key
+        const endpoint = "https://api.openai.com/v1/completions";
+
+        const prompt = `Suggest two career options based on passion: ${passion} and industry: ${industry}. 
+        Format: 1. [Career Option 1] 2. [Career Option 2]`;
+
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                prompt: prompt,
+                max_tokens: 50
+            })
+        });
+
+        const data = await response.json();
+        return data.choices[0].text.trim().split("\n"); // Extracting career options
+    }
+
+    try {
+        const careerOptions = await generateCareerOptions(selectedPassion, selectedIndustry);
+
+        if (careerOptions.length >= 2) {
+            document.getElementById("career-option-1").innerText = careerOptions[0];
+            document.getElementById("career-option-2").innerText = careerOptions[1];
+
+            document.getElementById("career-option-1").removeAttribute("disabled");
+            document.getElementById("career-option-2").removeAttribute("disabled");
+        }
+    } catch (error) {
+        console.error("Error generating career options:", error);
+        document.getElementById("career-heading").innerText = "Error loading career options.";
+    }
+
+    // Career selection logic
+    let selectedCareer = null;
+    const confirmButton = document.getElementById("confirm-career");
+
+    document.querySelectorAll(".option-button").forEach(button => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".option-button").forEach(btn => btn.classList.remove("selected"));
+            button.classList.add("selected");
+            selectedCareer = button.innerText;
+            confirmButton.removeAttribute("disabled");
+        });
+    });
+
+    confirmButton.addEventListener("click", () => {
+        if (selectedCareer) {
+            localStorage.setItem("selectedCareer", selectedCareer);
+            window.location.href = "future-chat.html";
+        }
+    });
+});
