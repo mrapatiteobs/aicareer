@@ -1,0 +1,130 @@
+/* Apply a pastel-colored background */
+body {
+    font-size: 10px; /* Set the font size for the entire website */
+    font-family: 'Arial', sans-serif;
+    background-color: #FCE4EC; /* Soft pink pastel */
+    color: #333;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container for the content */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+/* Ensure all text elements have a font size of 10px */
+h1, h2, h3, p, button, input, .passion-bubble, .option-button {
+    font-size: 10px; 
+}
+
+/* Style for input box */
+input {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #FF80AB;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Style for button */
+button {
+    background-color: #FF80AB; /* Soft pastel pink */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF4081; /* Darker pastel pink */
+}
+
+button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Grid layout for passion selection */
+.passion-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style for the passion bubbles */
+.passion-bubble {
+    background-color: #FFD3E0; /* Light pink */
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    border: 2px solid transparent;
+    font-size: 10px; /* Ensure font size is 10px */
+}
+
+.passion-bubble:hover {
+    background-color: #FF80AB; /* Darker pastel pink */
+    color: white;
+}
+
+.passion-bubble.selected {
+    background-color: #FF4081; /* Selected color */
+    color: white;
+    border: 2px solid white;
+}
+
+/* Style for the confirmation button */
+#confirmButton {
+    background-color: #FF80AB;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 10px; /* Ensure font size is 10px */
+}
+
+/* Industry selection grid */
+.options-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Industry selection buttons */
+.option-button {
+    background-color: #B2EBF2; /* Pastel cyan */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 10px; /* Ensure font size is 10px */
+}
+
+.option-button:hover {
+    background-color: #80DEEA;
+}
+
+.option-button.selected {
+    background-color: #00ACC1;
+    color: white;
+}
