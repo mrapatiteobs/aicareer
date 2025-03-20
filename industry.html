@@ -41,17 +41,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Industry Information</h1>
+        <h1 id="title-headline">Loading...</h1>
         <p id="industry-info">Loading industry information...</p>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
+            const username = localStorage.getItem("username") || "User";
             const selectedPassion = localStorage.getItem("selectedPassion");
             if (!selectedPassion) {
                 document.getElementById("industry-info").innerText = "No passion selected.";
                 return;
             }
+
+            document.getElementById("title-headline").innerText = `Now ${username}, from this list here, which industry would you want to be in?`;
 
             try {
                 const response = await fetch('https://raw.githubusercontent.com/mrapatiteobs/ai-career-website/main/expanded-passion-industry-table.md');
