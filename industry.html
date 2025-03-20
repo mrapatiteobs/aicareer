@@ -48,6 +48,29 @@
         .bubble:hover {
             background-color: #00cc00; /* Darker green on hover */
         }
+
+        .selected {
+            background-color: #FF00FF; /* Neon pink for selected bubble */
+            color: #FFFFFF; /* White text */
+        }
+
+        .button {
+            display: block;
+            margin: 20px auto 0 auto;
+            padding: 10px 20px;
+            background-color: #00FF00; /* Neon green background */
+            color: #000000; /* Black text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-decoration: none; /* Remove underline for links */
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #00cc00; /* Darker green on hover */
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -56,6 +79,7 @@
         <h1 id="title-headline">Loading...</h1>
         <div id="industry-info">Loading industry information...</div>
     </div>
+    <button class="button" id="choose-button" style="display: none;">I choose this!</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
@@ -93,6 +117,12 @@
                         const bubble = document.createElement('div');
                         bubble.className = 'bubble';
                         bubble.innerText = industry;
+                        bubble.addEventListener('click', function () {
+                            document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
+                            bubble.classList.add('selected');
+                            localStorage.setItem("selectedIndustry", industry);
+                            document.getElementById("choose-button").style.display = "block";
+                        });
                         industryInfoDiv.appendChild(bubble);
                     });
                 } else {
@@ -102,6 +132,10 @@
                 document.getElementById("industry-info").innerText = "Error loading industry information.";
                 console.error(error);
             }
+        });
+
+        document.getElementById("choose-button").addEventListener("click", function () {
+            window.location.href = "career.html";
         });
     </script>
 </body>
