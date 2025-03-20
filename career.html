@@ -49,11 +49,14 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const username = localStorage.getItem("username") || "User";
-            const selectedIndustry = localStorage.getItem("selectedIndustry");
+            let selectedIndustry = localStorage.getItem("selectedIndustry");
             if (!selectedIndustry) {
                 document.getElementById("career-headline").innerText = "No industry selected.";
                 return;
             }
+
+            selectedIndustry = selectedIndustry.trim(); // Trim any extra whitespace
+            console.log("Selected Industry:", selectedIndustry); // Log the selected industry
 
             const industryCareerMapping = {
                 "Technology": "Chief Technology Officer (CTO)",
@@ -349,7 +352,7 @@
             localStorage.setItem("selectedCareer", readCareer);
             const careerText = `In the year 2050,<br>${username}<br>is a world reknowned<br>${readCareer}.`;
             document.title = careerText;
-            
+            document.getElementById("title-headline").innerHTML = careerText;
             document.getElementById("career-headline").innerText = readCareer;
         });
     </script>
