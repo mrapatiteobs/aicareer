@@ -90,10 +90,9 @@
                     industryInfoDiv.innerHTML = ''; // Clear loading text
 
                     industryList.forEach(industry => {
-                        const bubble = document.createElement('a');
+                        const bubble = document.createElement('div');
                         bubble.className = 'bubble';
                         bubble.innerText = industry;
-                        bubble.href = '#'; // Add behavior if needed
                         industryInfoDiv.appendChild(bubble);
                     });
                 } else {
