@@ -1,0 +1,56 @@
+body {
+    background-color: #000000; /* Black background for a retro look */
+    color: #FFFFFF; /* White text color */
+    font-family: 'Courier New', Courier, monospace; /* Retro font */
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background-color: #1a1a1a; /* Dark gray background for the container */
+    padding: 20px;
+    border: 3px solid #00FF00; /* Neon green border */
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00FF00; /* Neon green glow */
+    display: inline-block;
+    width: 80%; /* Added width for better visibility */
+    margin: auto; /* Center the container */
+}
+
+h1 {
+    color: #FF00FF; /* Neon pink color for the text */
+    font-size: 2em; /* Adjusted font size for better visibility */
+    text-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+    margin-bottom: 20px; /* Added margin for spacing */
+}
+
+.bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.bubble {
+    background-color: #FF00FF; /* Neon pink background */
+    color: #000000; /* Black text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 1em; /* Font size */
+    box-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+}
+
+.bubble:hover {
+    background-color: #00FFFF; /* Neon cyan on hover */
+    color: #000000; /* Black text color */
+    box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+}
+
+.bubble.selected {
+    background-color: #00FFFF; /* Neon cyan for selected option */
+    color: #000000; /* Black text color */
+    box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+}

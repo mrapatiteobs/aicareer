@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hi User, what is your number 1 passion?</title>
+    <style>
+        body {
+            background-color: #000000; /* Black background for a retro look */
+            color: #FFFFFF; /* White text color */
+            font-family: 'Courier New', Courier, monospace; /* Retro font */
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #1a1a1a; /* Dark gray background for the container */
+            padding: 20px;
+            border: 3px solid #00FF00; /* Neon green border */
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00FF00; /* Neon green glow */
+            display: inline-block;
+            width: 80%; /* Added width for better visibility */
+            margin: auto; /* Center the container */
+        }
+
+        h1 {
+            color: #FF00FF; /* Neon pink color for the text */
+            font-size: 2em; /* Adjusted font size for better visibility */
+            text-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+
+        .bubbles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .bubble {
+            background-color: #FF00FF; /* Neon pink background */
+            color: #000000; /* Black text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 1em; /* Font size */
+            box-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+        }
+
+        .bubble:hover {
+            background-color: #00FFFF; /* Neon cyan on hover */
+            color: #000000; /* Black text color */
+            box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+        }
+
+        .bubble.selected {
+            background-color: #00FFFF; /* Neon cyan for selected option */
+            color: #000000; /* Black text color */
+            box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+        }
+
+        #next-button {
+            background-color: #FF00FF; /* Neon pink background */
+            color: #000000; /* Black text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em; /* Font size */
+            box-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+        }
+
+        #next-button:hover {
+            background-color: #00FFFF; /* Neon cyan on hover */
+            color: #000000; /* Black text color */
+            box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = localStorage.getItem("username") || "User";
+            document.title = `Hi ${username}, what is your number 1 passion?`;
+            document.getElementById("title-headline").innerText = `Hi ${username}, what is your number 1 passion?`;
+
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach(bubble => {
+                bubble.addEventListener('click', function() {
+                    bubbles.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    localStorage.setItem("selectedPassion", this.innerText);
+                });
+            });
+        });
+
+        function moveToNextPart() {
+            if (localStorage.getItem("selectedPassion")) {
+                window.location.href = "industry.html";
+            } else {
+                alert("Please select a passion before proceeding.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title-headline"></h1>
+        <div class="bubbles">
+            <div class="bubble">Technology</div>
+            <div class="bubble">Medicine</div>
+            <div class="bubble">Business</div>
+            <div class="bubble">Art & Design</div>
+            <div class="bubble">Psychology</div>
+            <div class="bubble">Environment</div>
+            <div class="bubble">Education</div>
+            <div class="bubble">Engineering</div>
+            <div class="bubble">Finance</div>
+            <div class="bubble">Music</div>
+            <div class="bubble">Social Work</div>
+            <div class="bubble">Marketing</div>
+            <div class="bubble">Writing</div>
+            <div class="bubble">Sports</div>
+            <div class="bubble">Public Relations</div>
+            <div class="bubble">Science</div>
+            <div class="bubble">Politics</div>
+            <div class="bubble">Gaming</div>
+            <div class="bubble">Space/Astronomy</div>
+            <div class="bubble">Entrepreneurship</div>
+            <div class="bubble">History</div>
+            <div class="bubble">Travel</div>
+            <div class="bubble">Photography</div>
+            <div class="bubble">Law</div>
+            <div class="bubble">Automotive</div>
+            <div class="bubble">Fashion</div>
+            <div class="bubble">AI & Robotics</div>
+            <div class="bubble">Architecture</div>
+            <div class="bubble">Cybersecurity</div>
+            <div class="bubble">Film & Media</div>
+            <div class="bubble">Philosophy</div>
+            <div class="bubble">Interior Design</div>
+            <div class="bubble">Culinary Arts</div>
+            <div class="bubble">Sociology</div>
+            <div class="bubble">Fitness & Nutrition</div>
+            <div class="bubble">Human Rights</div>
+            <div class="bubble">Journalism</div>
+            <div class="bubble">Theology</div>
+            <div class="bubble">Marine Biology</div>
+            <div class="bubble">Agriculture</div>
+            <div class="bubble">Animal Care</div>
+            <div class="bubble">Luxury Goods</div>
+            <div class="bubble">Cultural Studies</div>
+            <div class="bubble">Military Strategy</div>
+            <div class="bubble">Meditation & Mindfulness</div>
+            <div class="bubble">Psychology of Habits</div>
+            <div class="bubble">Renewable Energy</div>
+            <div class="bubble">Sustainable Living</div>
+            <div class="bubble">Blockchain & Cryptocurrency</div>
+            <div class="bubble">ESports</div>
+            <div class="bubble">VR/AR Development</div>
+            <div class="bubble">Genetic Engineering</div>
+            <div class="bubble">Astrobiology</div>
+            <div class="bubble">Virtual Economies</div>
+            <div class="bubble">Metaverse Development</div>
+            <div class="bubble">Futurism</div>
+            <div class="bubble">Urban Planning</div>
+            <div class="bubble">Biochemistry</div>
+            <div class="bubble">Wilderness Survival</div>
+        </div>
+        <button id="next-button" onclick="moveToNextPart()">Got it! Let's move to the next part!</button>
+    </div>
+</body>
+</html>
