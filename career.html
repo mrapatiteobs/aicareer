@@ -337,40 +337,7 @@
                 "Space Data Analysis": "Space Data Analyst",
                 "Space Law": "Space Lawyer",
                 "Planetary Science": "Planetary Scientist",
-                "Space Agriculture": "Space Agriculture Specialist",
-                "Social Entrepreneurship": "Social Entrepreneur",
-                "E-commerce": "E-commerce Operations Manager",
-                "Innovation": "Innovation Manager",
-                "Product Development": "Product Development Manager",
-                "Business Development": "Business Development Director",
-                "Small Business": "Small Business Owner",
-                "Business Coaching": "Business Coach",
-                "Franchise Business": "Franchise Development Manager",
-                "Crowdfunding": "Crowdfunding Specialist",
-                "Business Incubation": "Business Incubator Manager",
-                "Family Business": "Family Business Advisor",
-                "Business Strategy": "Business Strategist",
-                "Entrepreneurship Education": "Entrepreneurship Educator",
-                "Cultural Heritage Preservation": "Cultural Heritage Manager",
-                "Museum Curation": "Museum Curator",
-                "Archaeology": "Archaeologist",
-                "Historical Research": "Historical Researcher",
-                "Archival Science": "Archivist",
-                "Historic Preservation": "Historic Preservation Specialist",
-                "Genealogy": "Genealogist",
-                "Anthropology": "Anthropologist",
-                "Art History": "Art Historian",
-                "Library Science": "Librarian",
-                "History Education": "History Teacher",
-                "Publishing": "Publisher",
-                "Documentary Filmmaking": "Documentary Filmmaker",
-                "Historic Site Management": "Historic Site Manager",
-                "Cultural Resource Management": "Cultural Resource Manager",
-                "Public History": "Public Historian",
-                "Travel": "Travel Consultant",
-                "Transportation": "Transportation Planner",
-                "Aviation": "Aviation Manager",
-                "Event Planning": "Event Planner"
+                "Space Agriculture": "Space Agriculture Specialist"
             };
 
             const readCareer = industryCareerMapping[selectedIndustry];
@@ -380,9 +347,9 @@
             }
 
             localStorage.setItem("selectedCareer", readCareer);
-            const careerText = `In the year 2050, ${username} is a ${readCareer}.`;
+            const careerText = `In the year 2050,<br>${username}<br>is a world reknowned<br>${readCareer}.`;
             document.title = careerText;
-            document.getElementById("title-headline").innerText = careerText;
+            document.getElementById("title-headline").innerHTML = careerText;
             document.getElementById("career-headline").innerText = readCareer;
         });
     </script>
