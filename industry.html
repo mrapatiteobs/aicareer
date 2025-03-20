@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industry Information</title>
+    <title>Now (username), from this list here, which industry would you want to be in?</title>
     <style>
         body {
             background-color: #000000; /* Black background for a retro look */
@@ -54,7 +54,9 @@
                 return;
             }
 
-            document.getElementById("title-headline").innerText = `Now ${username}, from this list here, which industry would you want to be in?`;
+            const titleText = `Now ${username}, from this list here, which industry would you want to be in?`;
+            document.title = titleText;
+            document.getElementById("title-headline").innerText = titleText;
 
             try {
                 const response = await fetch('https://raw.githubusercontent.com/mrapatiteobs/ai-career-website/main/expanded-passion-industry-table.md');
