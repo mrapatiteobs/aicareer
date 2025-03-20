@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi User, what is your number 1 passion?</title>
     <style>
         body {
@@ -46,11 +48,11 @@
             margin: 5px;
             font-size: 1em; /* Font size */
             box-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
-        .bubble:hover {
+        .bubble:hover:not(.selected) {
             background-color: #00FFFF; /* Neon cyan on hover */
-            color: #000000; /* Black text color */
             box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
         }
 
@@ -86,6 +88,7 @@
             document.getElementById("title-headline").innerText = `Hi ${username}, what is your number 1 passion?`;
 
             const bubbles = document.querySelectorAll('.bubble');
+
             bubbles.forEach(bubble => {
                 bubble.addEventListener('click', function() {
                     bubbles.forEach(b => b.classList.remove('selected'));
@@ -93,6 +96,16 @@
                     localStorage.setItem("selectedPassion", this.innerText);
                 });
             });
+
+            // Maintain the highlighted bubble on page reload
+            const selectedPassion = localStorage.getItem("selectedPassion");
+            if (selectedPassion) {
+                bubbles.forEach(bubble => {
+                    if (bubble.innerText === selectedPassion) {
+                        bubble.classList.add('selected');
+                    }
+                });
+            }
         });
 
         function moveToNextPart() {
@@ -106,7 +119,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="title-headline"></h1>
+        <h1 id="title-headline">Hi User, what is your number 1 passion?</h1>
         <div class="bubbles">
             <div class="bubble">Technology</div>
             <div class="bubble">Medicine</div>
