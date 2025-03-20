@@ -79,7 +79,7 @@
         <h1 id="title-headline">Loading...</h1>
         <div id="industry-info">Loading industry information...</div>
     </div>
-    <button class="button" id="choose-button" style="display: none;">I choose this!</button>
+    <button class="button" id="choose-button">I choose this!</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
@@ -121,7 +121,6 @@
                             document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
                             bubble.classList.add('selected');
                             localStorage.setItem("selectedIndustry", industry);
-                            document.getElementById("choose-button").style.display = "block";
                         });
                         industryInfoDiv.appendChild(bubble);
                     });
