@@ -1,78 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Industry Selection</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const username = localStorage.getItem("username") || "User";
-            const passionOption = localStorage.getItem("selectedPassion");
-
-            // Function to fetch and parse the industry options from the markdown file
-            async function fetchIndustryOptions() {
-                const response = await fetch('https://raw.githubusercontent.com/mrapatiteobs/ai-career-website/main/expanded-passion-industry-table.md');
-                const text = await response.text();
-                const industryOptions = parseIndustryOptions(text);
-                return industryOptions;
-            }
-
-            // Function to parse the industry options from the markdown content
-            function parseIndustryOptions(text) {
-                const lines = text.split('\n');
-                const options = {};
-                lines.forEach(line => {
-                    if (line.startsWith('|')) {
-                        const [passion, industries] = line.split('|').map(item => item.trim());
-                        if (passion && industries) {
-                            options[passion] = industries.split(',').map(item => item.trim());
-                        }
-                    }
-                });
-                return options;
-            }
-
-            // Function to display the industry options based on the selected passion
-            function displayIndustryOptions(industryOptions) {
-                if (passionOption && industryOptions[passionOption]) {
-                    const industryContainer = document.getElementById('industry-options');
-                    industryOptions[passionOption].forEach(industry => {
-                        const industryDiv = document.createElement('div');
-                        industryDiv.className = 'industry-option';
-                        industryDiv.innerText = industry;
-                        industryDiv.addEventListener('click', function () {
-                            localStorage.setItem("selectedIndustry", industry);
-                            // Highlight the selected option
-                            document.querySelectorAll('.industry-option').forEach(el => el.classList.remove('selected'));
-                            industryDiv.classList.add('selected');
-                        });
-                        industryContainer.appendChild(industryDiv);
-                    });
-                }
-            }
-
-            // Fetch and display industry options
-            fetchIndustryOptions().then(industryOptions => {
-                displayIndustryOptions(industryOptions);
-            });
-
-            document.getElementById('welcome-message').innerText = `Hi ${username}, select your preferred industry in ${passionOption}`;
-        });
-
-        function moveToNextPart() {
-            if (localStorage.getItem("selectedIndustry")) {
-                window.location.href = "next.html"; // Replace with the actual next part URL
-            } else {
-                alert("Please select an industry before proceeding.");
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Information</title>
+    <style>
+        body {
+            background-color: #000000; /* Black background for a retro look */
+            color: #FFFFFF; /* White text color */
+            font-family: 'Courier New', Courier, monospace; /* Retro font */
+            text-align: center;
+            padding: 50px;
         }
-    </script>
+
+        .container {
+            background-color: #1a1a1a; /* Dark gray background for the container */
+            padding: 20px;
+            border: 3px solid #00FF00; /* Neon green border */
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00FF00; /* Neon green glow */
+            display: inline-block;
+            width: 80%; /* Added width for better visibility */
+            margin: auto; /* Center the container */
+        }
+
+        h1 {
+            color: #FF00FF; /* Neon pink color for the text */
+            font-size: 2em; /* Adjusted font size for better visibility */
+            text-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+
+        p {
+            color: #00FFFF; /* Neon cyan color for the text */
+            font-size: 1.2em; /* Adjusted font size for better visibility */
+            margin-top: 20px; /* Added margin for spacing */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1 id="welcome-message"></h1>
-        <div id="industry-options" class="bubbles"></div>
-        <button id="next-button" onclick="moveToNextPart()">Got it! Let's move to the next part!</button>
+        <h1>Industry Information</h1>
+        <p id="industry-info">Loading industry information...</p>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const selectedPassion = localStorage.getItem("selectedPassion");
+            if (!selectedPassion) {
+                document.getElementById("industry-info").innerText = "No passion selected.";
+                return;
+            }
+
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/mrapatiteobs/ai-career-website/main/expanded-passion-industry-table.md');
+                const markdown = await response.text();
+
+                const rows = markdown.split('\n').filter(row => row.trim().startsWith('|'));
+                const headers = rows[0].split('|').map(header => header.trim());
+
+                let industryData = "No matching industry found.";
+                for (let i = 1; i < rows.length; i++) {
+                    const columns = rows[i].split('|').map(column => column.trim());
+                    if (columns[0].toLowerCase() === selectedPassion.toLowerCase()) {
+                        industryData = columns.slice(1).join(', ');
+                        break;
+                    }
+                }
+
+                document.getElementById("industry-info").innerText = industryData;
+            } catch (error) {
+                document.getElementById("industry-info").innerText = "Error loading industry information.";
+                console.error(error);
+            }
+        });
+    </script>
 </body>
 </html>
