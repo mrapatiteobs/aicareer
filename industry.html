@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Now (username), from this list here, which industry would you want to be in?</title>
+    <title>(username), from this list here, which industry would you want to be in?</title>
     <style>
         body {
             background-color: #000000; /* Black background for a retro look */
@@ -31,10 +31,21 @@
             margin-bottom: 20px; /* Added margin for spacing */
         }
 
-        p {
-            color: #00FFFF; /* Neon cyan color for the text */
-            font-size: 1.2em; /* Adjusted font size for better visibility */
-            margin-top: 20px; /* Added margin for spacing */
+        .bubble {
+            display: inline-block;
+            background-color: #00FF00; /* Neon green background */
+            color: #000000; /* Black text */
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 50px;
+            box-shadow: 0 0 10px #00FF00; /* Neon green glow */
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none; /* Remove underline for links */
+        }
+
+        .bubble:hover {
+            background-color: #00cc00; /* Darker green on hover */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -42,7 +53,7 @@
 <body>
     <div class="container">
         <h1 id="title-headline">Loading...</h1>
-        <p id="industry-info">Loading industry information...</p>
+        <div id="industry-info">Loading industry information...</div>
     </div>
 
     <script>
@@ -72,7 +83,21 @@
                     }
                 }
 
-                document.getElementById("industry-info").innerText = industryData;
+                if (industryData !== "No matching industry found.") {
+                    const industryList = industryData.split(',').map(item => item.trim());
+                    const industryInfoDiv = document.getElementById("industry-info");
+                    industryInfoDiv.innerHTML = ''; // Clear loading text
+
+                    industryList.forEach(industry => {
+                        const bubble = document.createElement('a');
+                        bubble.className = 'bubble';
+                        bubble.innerText = industry;
+                        bubble.href = '#'; // Add behavior if needed
+                        industryInfoDiv.appendChild(bubble);
+                    });
+                } else {
+                    document.getElementById("industry-info").innerText = industryData;
+                }
             } catch (error) {
                 document.getElementById("industry-info").innerText = "Error loading industry information.";
                 console.error(error);
