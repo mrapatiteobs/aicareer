@@ -62,7 +62,7 @@
                 for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
                     const columns = rows[i].split('|').map(column => column.trim());
                     if (columns[1].toLowerCase() === selectedPassion.toLowerCase()) {
-                        industryData = columns.slice(2).join(', ');
+                        industryData = columns[2];
                         break;
                     }
                 }
