@@ -3,17 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hey Me!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Welcome</title>
+    <style>
+        body {
+            background-color: #000000; /* Black background for a retro look */
+            color: #FFFFFF; /* White text color */
+            font-family: 'Courier New', Courier, monospace; /* Retro font */
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #1a1a1a; /* Dark gray background for the container */
+            padding: 20px;
+            border: 3px solid #00FF00; /* Neon green border */
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00FF00; /* Neon green glow */
+            display: inline-block;
+            width: 50%; /* Added width for better visibility */
+            margin: auto; /* Center the container */
+        }
+
+        h1 {
+            color: #FF00FF; /* Neon pink color for the text */
+            font-size: 2em; /* Adjusted font size for better visibility */
+            text-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 2px solid #00FF00; /* Neon green border */
+            width: 80%; /* Adjusted width for better visibility */
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+
+        button {
+            background-color: #FF00FF; /* Neon pink background */
+            color: #000000; /* Black text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em; /* Font size */
+            box-shadow: 0 0 10px #FF00FF; /* Neon pink glow */
+        }
+
+        button:hover {
+            background-color: #00FFFF; /* Neon cyan on hover */
+            color: #000000; /* Black text color */
+            box-shadow: 0 0 15px #00FFFF; /* Neon cyan glow */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Hey Me!</h1>
-        <p>Who am I talking to?</p>
-        <input type="text" id="nameInput" placeholder="Enter your name">
+        <h1>Welcome! Please enter your username:</h1>
+        <input type="text" id="username" placeholder="Enter your username">
         <br>
-        <button onclick="storeName()">Let's find out more about you!</button>
+        <button onclick="saveUsername()">Submit</button>
     </div>
-    <script src="scripts.js"></script>
+
+    <script>
+        function saveUsername() {
+            const username = document.getElementById('username').value;
+            if (username) {
+                localStorage.setItem('username', username);
+                window.location.href = 'passion.html';
+            } else {
+                alert('Please enter a username.');
+            }
+        }
+    </script>
 </body>
 </html>
