@@ -11,7 +11,7 @@
 
             // Function to fetch and parse the industry options from the markdown file
             async function fetchIndustryOptions() {
-                const response = await fetch('https://github.com/mrapatiteobs/ai-career-website/blob/main/expanded-passion-industry-table.md');
+                const response = await fetch('https://raw.githubusercontent.com/mrapatiteobs/ai-career-website/main/expanded-passion-industry-table.md');
                 const text = await response.text();
                 const industryOptions = parseIndustryOptions(text);
                 return industryOptions;
@@ -22,9 +22,11 @@
                 const lines = text.split('\n');
                 const options = {};
                 lines.forEach(line => {
-                    const [passion, industries] = line.split('|').map(item => item.trim());
-                    if (passion && industries) {
-                        options[passion] = industries.split(',').map(item => item.trim());
+                    if (line.startsWith('|')) {
+                        const [passion, industries] = line.split('|').map(item => item.trim());
+                        if (passion && industries) {
+                            options[passion] = industries.split(',').map(item => item.trim());
+                        }
                     }
                 });
                 return options;
