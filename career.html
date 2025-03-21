@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In the year 2050, </title>
+    <title>time travelled..</title>
     <style>
         body {
             background-color: #000000; /* Black background for a retro look */
@@ -350,12 +350,10 @@
             }
 
             localStorage.setItem("selectedCareer", readCareer);
-            const careerText = `In the year 2050, 
- ${username} 
-is a world reknowned
-${readCareer}.`;
-      
-          
+            const careerText = `In the year 2050,\n${username}\nis a world reknowned\n${readCareer}.`;
+            document.title = "time travelled..";
+            document.getElementById("title-headline").innerText = careerText;
+            document.getElementById("career-headline").innerText = readCareer;
         });
     </script>
 </body>
