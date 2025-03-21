@@ -115,7 +115,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="title-headline">Loading...</h1>
+        <h1 id="title-headline">In the year 2050</h1>
         <h2 id="career-headline">Loading career information...</h2>
         <div class="letter-container">
             <img src="letter-icon.png" alt="Letter Icon" class="letter-icon" onclick="showPopup()">
@@ -132,143 +132,90 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const username = localStorage.getItem("username") || "User";
-            let selectedIndustry = localStorage.getItem("selectedIndustry");
-            if (!selectedIndustry) {
-                document.getElementById("career-headline").innerText = "No industry selected.";
+            let readcareer = localStorage.getItem("readcareer");
+            if (!readcareer) {
+                document.getElementById("career-headline").innerText = "Career information not found.";
                 return;
             }
 
-            selectedIndustry = selectedIndustry.trim(); // Trim any extra whitespace
-            console.log("Selected Industry:", selectedIndustry); // Log the selected industry
+            readcareer = readcareer.trim(); // Trim any extra whitespace
+            document.getElementById("title-headline").innerHTML = `In the year 2050<br>${username} is a world reknowned<br><br>${readcareer}`;
 
-            const industryCareerMapping = {
-                "Technology": "Chief Technology Officer (CTO)",
-                "Cybersecurity": "Cybersecurity Analyst",
-                "AI & Robotics": "AI Research Scientist",
-                "Data Science": "Data Scientist",
-                "Blockchain & Cryptocurrency": "Blockchain Developer",
-                "Augmented Reality (AR)": "AR Experience Designer",
-                "Virtual Reality (VR)": "VR Game Developer",
-                "Metaverse Development": "Metaverse Architect",
-                "Quantum Computing": "Quantum Computing Engineer",
-                "Legal Tech": "Legal Technology Consultant",
-                "Autonomous Vehicles": "Autonomous Vehicle Engineer",
-                "Nanotechnology": "Nanotechnology Research Scientist",
-                "Smart Cities": "Smart City Planner",
-                "Space Exploration": "Space Mission Planner",
-                "Renewable Energy": "Renewable Energy Consultant",
-                "Biotech": "Biotech Research Scientist",
-                "Fintech": "Fintech Product Manager",
-                "Home Automation": "Home Automation Specialist",
-                "Education Technology (EdTech)": "EdTech Curriculum Developer",
-                "Healthcare": "Medical Innovations Director",
-                "Veterinary Medicine": "Veterinary Technician",
-                "Zookeeper": "Zookeeper"
+            const careerMessages = {
+                "Chief Technology Officer (CTO)": "As a Chief Technology Officer, my day involves overseeing the technological direction of the company. Today, I faced the challenge of integrating new AI systems.",
+                "Cybersecurity Analyst": "A day in the life of a Cybersecurity Analyst involves protecting our organization's digital assets. Today, I tackled the challenge of responding to a sophisticated cyber attack.",
+                "AI Research Scientist": "As an AI Research Scientist, my day involves developing cutting-edge algorithms. Today, I faced the challenge of improving the accuracy of our machine learning models.",
+                "Data Scientist": "A day in the life of a Data Scientist involves analyzing complex datasets to uncover insights. Today, I tackled the challenge of predicting customer behavior using data.",
+                "Blockchain Developer": "As a Blockchain Developer, my day involves building decentralized applications. Today, I faced the challenge of optimizing a smart contract for efficiency.",
+                "AR Experience Designer": "A day in the life of an AR Experience Designer involves creating immersive augmented reality experiences. Today, I tackled the challenge of designing an interactive AR app.",
+                "VR Game Developer": "As a VR Game Developer, my day involves designing and developing virtual reality games. Today, I faced the challenge of optimizing performance for a complex VR game.",
+                "Metaverse Architect": "A day in the life of a Metaverse Architect involves designing virtual worlds. Today, I tackled the challenge of creating a scalable and immersive environment.",
+                "Quantum Computing Engineer": "As a Quantum Computing Engineer, my day involves developing quantum algorithms. Today, I faced the challenge of optimizing a quantum algorithm for a specific task.",
+                "Legal Technology Consultant": "A day in the life of a Legal Technology Consultant involves advising clients on legal tech solutions. Today, I tackled the challenge of implementing a new legal software system.",
+                "Autonomous Vehicle Engineer": "As an Autonomous Vehicle Engineer, my day involves developing self-driving technology. Today, I faced the challenge of improving the safety algorithms for our autonomous cars.",
+                "Nanotechnology Research Scientist": "A day in the life of a Nanotechnology Research Scientist involves conducting experiments at the nanoscale. Today, I tackled the challenge of developing a new nanomaterial.",
+                "Smart City Planner": "As a Smart City Planner, my day involves designing sustainable urban solutions. Today, I faced the challenge of integrating smart infrastructure into an existing city.",
+                "Space Mission Planner": "A day in the life of a Space Mission Planner involves planning space missions. Today, I tackled the challenge of coordinating a multi-agency mission to Mars.",
+                "Renewable Energy Consultant": "As a Renewable Energy Consultant, my day involves advising on sustainable energy solutions. Today, I faced the challenge of developing a renewable energy plan for a city.",
+                "Biotech Research Scientist": "A day in the life of a Biotech Research Scientist involves conducting research to develop new biotechnologies. Today, I tackled the challenge of creating a new biotech product.",
+                "Fintech Product Manager": "As a Fintech Product Manager, my day involves overseeing the development of financial technology products. Today, I faced the challenge of launching a new fintech app.",
+                "Home Automation Specialist": "A day in the life of a Home Automation Specialist involves designing and installing smart home systems. Today, I tackled the challenge of integrating multiple devices into a seamless system.",
+                "EdTech Curriculum Developer": "As an EdTech Curriculum Developer, my day involves creating educational technology resources. Today, I faced the challenge of developing an interactive online course.",
+                "Medical Innovations Director": "A day in the life of a Medical Innovations Director involves leading the development of new medical technologies. Today, I tackled the challenge of bringing a new medical device to market.",
+                "Veterinary Technician": "As a Veterinary Technician, my day involves assisting veterinarians in providing medical care to animals. Today, I faced the challenge of preparing a pet for surgery.",
+                "Zookeeper": "A day in the life of a Zookeeper involves caring for and managing animals in a zoo. Today, I tackled the challenge of creating an enrichment program for the primates."
+                // Add all other career data here
             };
 
-            const careerData = [
-                {
-                    title: "Chief Technology Officer (CTO)",
-                    message: "As a Chief Technology Officer, my day involves overseeing the technological direction of the company. Today, I faced the challenge of integrating new AI systems."
-                },
-                {
-                    title: "Cybersecurity Analyst",
-                    message: "A day in the life of a Cybersecurity Analyst involves protecting our organization's digital assets. Today, I tackled the challenge of responding to a sophisticated cyber attack."
-                },
-                {
-                    title: "AI Research Scientist",
-                    message: "As an AI Research Scientist, my day involves developing cutting-edge algorithms. Today, I faced the challenge of improving the accuracy of our machine learning models."
-                },
-                {
-                    title: "Data Scientist",
-                    message: "A day in the life of a Data Scientist involves analyzing complex datasets to uncover insights. Today, I tackled the challenge of predicting customer behavior using data."
-                },
-                {
-                    title: "Blockchain Developer",
-                    message: "As a Blockchain Developer, my day involves building decentralized applications. Today, I faced the challenge of optimizing a smart contract for efficiency."
-                },
-                {
-                    title: "AR Experience Designer",
-                    message: "A day in the life of an AR Experience Designer involves creating immersive augmented reality experiences. Today, I tackled the challenge of designing an interactive AR app."
-                },
-                {
-                    title: "VR Game Developer",
-                    message: "As a VR Game Developer, my day involves designing and developing virtual reality games. Today, I faced the challenge of optimizing performance for a complex VR game."
-                },
-                {
-                    title: "Metaverse Architect",
-                    message: "A day in the life of a Metaverse Architect involves designing virtual worlds. Today, I tackled the challenge of creating a scalable and immersive environment."
-                },
-                {
-                    title: "Quantum Computing Engineer",
-                    message: "As a Quantum Computing Engineer, my day involves developing quantum algorithms. Today, I faced the challenge of optimizing a quantum algorithm for a specific task."
-                },
-                {
-                    title: "Legal Technology Consultant",
-                    message: "A day in the life of a Legal Technology Consultant involves advising clients on legal tech solutions. Today, I tackled the challenge of implementing a new legal software system."
-                },
-                {
-                    title: "Autonomous Vehicle Engineer",
-                    message: "As an Autonomous Vehicle Engineer, my day involves developing self-driving technology. Today, I faced the challenge of improving the safety algorithms for our autonomous cars."
-                },
-                {
-                    title: "Nanotechnology Research Scientist",
-                    message: "A day in the life of a Nanotechnology Research Scientist involves conducting experiments at the nanoscale. Today, I tackled the challenge of developing a new nanomaterial."
-                },
-                {
-                    title: "Smart City Planner",
-                    message: "As a Smart City Planner, my day involves designing sustainable urban solutions. Today, I faced the challenge of integrating smart infrastructure into an existing city."
-                },
-                {
-                    title: "Space Mission Planner",
-                    message: "A day in the life of a Space Mission Planner involves planning space missions. Today, I tackled the challenge of coordinating a multi-agency mission to Mars."
-                },
-                {
-                    title: "Renewable Energy Consultant",
-                    message: "As a Renewable Energy Consultant, my day involves advising on sustainable energy solutions. Today, I faced the challenge of developing a renewable energy plan for a city."
-                },
-                {
-                    title: "Biotech Research Scientist",
-                    message: "A day in the life of a Biotech Research Scientist involves conducting research to develop new biotechnologies. Today, I tackled the challenge of creating a new biotech product."
-                },
-                {
-                    title: "Fintech Product Manager",
-                    message: "As a Fintech Product Manager, my day involves overseeing the development of financial technology products. Today, I faced the challenge of launching a new fintech app."
-                },
-                {
-                    title: "Home Automation Specialist",
-                    message: "A day in the life of a Home Automation Specialist involves designing and installing smart home systems. Today, I tackled the challenge of integrating multiple devices into a seamless system."
-                },
-                {
-                    title: "EdTech Curriculum Developer",
-                    message: "As an EdTech Curriculum Developer, my day involves creating educational technology resources. Today, I faced the challenge of developing an interactive online course."
-                },
-                {
-                    title: "Medical Innovations Director",
-                    message: "A day in the life of a Medical Innovations Director involves leading the development of new medical technologies. Today, I tackled the challenge of bringing a new medical device to market."
-                },
-                {
-                    title: "Veterinary Technician",
-                    message: "As a Veterinary Technician, my day involves assisting veterinarians in providing medical care to animals. Today, I faced the challenge of preparing a pet for surgery."
-                },
-                {
-                    title: "Zookeeper",
-                    message: "A day in the life of a Zookeeper involves caring for and managing animals in a zoo. Today, I tackled the challenge of creating an enrichment program for the primates."
+            fetchCareerData().then(careerData => {
+                const careerInfo = careerData[readcareer];
+                if (careerInfo) {
+                    document.getElementById("popmessage").innerText = careerInfo;
+                } else {
+                    document.getElementById("popmessage").innerText = "Career information not found.";
                 }
-                // Add all other career data here
+            });
+        });
+
+        async function fetchCareerData() {
+            const files = [
+                'heyme-table-part1.md',
+                'heyme-table-part10.md',
+                'heyme-table-part11.md',
+                'heyme-table-part12.md',
+                'heyme-table-part13.md',
+                'heyme-table-part14.md',
+                'heyme-table-part15.md',
+                'heyme-table-part16.md',
+                'heyme-table-part2.md',
+                'heyme-table-part3.md',
+                'heyme-table-part4.md',
+                'heyme-table-part5.md',
+                'heyme-table-part6.md',
+                'heyme-table-part7.md',
+                'heyme-table-part8.md',
+                'heyme-table-part9.md'
             ];
 
-            const selectedCareer = industryCareerMapping[selectedIndustry];
-            const careerInfo = careerData.find(career => career.title === selectedCareer);
+            const repo = 'mrapatiteobs/ai-career-website';
+            let careerData = {};
 
-            if (careerInfo) {
-                document.getElementById("title-headline").innerText = `Welcome, ${username}!`;
-                document.getElementById("career-headline").innerText = `Your future career in ${selectedIndustry}: ${selectedCareer}`;
-                document.getElementById("popmessage").innerText = careerInfo.message;
-            } else {
-                document.getElementById("career-headline").innerText = "Career information not found.";
+            for (const file of files) {
+                const response = await fetch(`https://raw.githubusercontent.com/${repo}/main/${file}`);
+                const text = await response.text();
+                const rows = text.split('\n').slice(4); // Skip the header rows
+
+                rows.forEach(row => {
+                    const columns = row.split('|').map(col => col.trim());
+                    if (columns.length > 2) {
+                        const career = columns[1];
+                        const message = columns[2];
+                        careerData[career] = message;
+                    }
+                });
             }
-        });
+            return careerData;
+        }
 
         function showPopup() {
             document.getElementById("overlay").style.display = "block";
